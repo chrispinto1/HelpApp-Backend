@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :donations, except: [:delete]
   resources :users
   resources :events
-
+  
   post "/login", to: "auth#login"
   get "/auto_login", to: "auth#auto_login"
 end
