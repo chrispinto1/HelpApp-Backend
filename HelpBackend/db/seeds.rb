@@ -29,6 +29,7 @@ iris =  Event.create(title: "The Gagne Travel Fund", goal:6000 , description: "I
 
 # donations
 
+
 Donation.create(user_id: a.id, event_id: test.id, amount: 5)
 Donation.create(user_id: b.id, event_id: test.id, amount: 5)
 Donation.create(user_id: c.id, event_id: test.id, amount: 5)
