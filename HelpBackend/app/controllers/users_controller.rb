@@ -8,7 +8,8 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.new(username: params[:username], password: params[:password])
+    byebug
+    user = User.new(username: params[:username], password: params[:password] ,credit_card: params[:credit_card])
     if user.save
       render json: user
     else
