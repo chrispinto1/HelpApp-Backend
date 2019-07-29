@@ -1,19 +1,21 @@
 class UsersController < ApplicationController
   def index
     users = User.all
-    render json: users.to_json(:include => {
-      :donations => {:only => [:user_id, :event_id,:amount, :created_at]},
-      :events => {:except => [:updated_at]}
-      })
+    render json: users
   end
 
   def create
-    byebug
     user = User.new(username: params[:username], password: params[:password] ,credit_card: params[:credit_card])
+
     if user.save
-      render json: user
+      token = encode_token(user.id)
+      render json: {user: user, token: token}
     else
       render json: {erros: user.errors.full_messages}
     end
+  end
+
+  def delete
+    user = User.find_by(params[:id]).delete
   end
 end
