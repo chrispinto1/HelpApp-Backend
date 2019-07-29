@@ -8,8 +8,7 @@ class UsersController < ApplicationController
     user = User.new(username: params[:username], password: params[:password] ,credit_card: params[:credit_card])
 
     if user.save
-      token = encode_token(user.id)
-      render json: {user: user, token: token}
+      render json: user
     else
       render json: {erros: user.errors.full_messages}
     end
