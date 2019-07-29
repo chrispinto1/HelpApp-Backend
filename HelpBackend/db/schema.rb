@@ -15,18 +15,9 @@ ActiveRecord::Schema.define(version: 2019_07_26_135904) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "donations", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "event_id"
-    t.integer "amount"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_donations_on_event_id"
-    t.index ["user_id"], name: "index_donations_on_user_id"
-  end
-
-  create_table "events", force: :cascade do |t|
+  create_table "campaigns", force: :cascade do |t|
     t.string "title"
+    t.string "image"
     t.integer "goal"
     t.string "description"
     t.integer "raised_donation"
@@ -35,7 +26,17 @@ ActiveRecord::Schema.define(version: 2019_07_26_135904) do
     t.boolean "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_events_on_user_id"
+    t.index ["user_id"], name: "index_campaigns_on_user_id"
+  end
+
+  create_table "donations", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "campaign_id"
+    t.integer "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["campaign_id"], name: "index_donations_on_campaign_id"
+    t.index ["user_id"], name: "index_donations_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -45,7 +46,7 @@ ActiveRecord::Schema.define(version: 2019_07_26_135904) do
     t.string "username"
   end
 
-  add_foreign_key "donations", "events"
+  add_foreign_key "campaigns", "users"
+  add_foreign_key "donations", "campaigns"
   add_foreign_key "donations", "users"
-  add_foreign_key "events", "users"
 end
