@@ -1,9 +1,10 @@
 class DonationsController < ApplicationController
 
   def index
-    donations = Donation.all
+    donations = Donation.find_by(campaign_id: params[:campaign])
     render json: donations
   end
+
 
   def create
     donation = Donation.create(user_id: params[:user_id], campaign_id: params[:campaign_id], amount: params[:amount])
@@ -13,4 +14,5 @@ class DonationsController < ApplicationController
 ​
     render json: {donation: donation, campaign: campaign}
   end
+
 end
