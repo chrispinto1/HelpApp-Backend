@@ -23,7 +23,8 @@ class CampaignsController < ApplicationController
     render json: campaign
   end
 
-  def delete
-    Campaign.find(params[:id]).delete
+  def destroy
+    campaign = Campaign.find(params[:id]).destroy
+    render json: campaign
   end
 end
