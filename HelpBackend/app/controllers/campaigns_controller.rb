@@ -15,4 +15,16 @@ class CampaignsController < ApplicationController
       render json: {errors: "Please fill out each field"}
     end
   end
+
+  def update
+    campaign = Campaign.find(params[:id])
+
+    campaign.update(title: params[:title], description: params[:description], goal: params[:goal], end_date: params[:end_date])
+
+    render json: campaign
+  end
+
+  def delete
+    Campaign.find(params[:id]).delete
+  end
 end
