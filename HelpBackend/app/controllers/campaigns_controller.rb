@@ -6,8 +6,7 @@ class CampaignsController < ApplicationController
   end
 
   def create
-    byebug
-    campaign = Campaign.create(title: params[:title], description: params[:description], goal: params[:goal], end_date: params[:end_date], raised_donation: 0, active: true)
+    campaign = Campaign.create(title: params[:title], user_id: params[:user_id], description: params[:description],image: params[:image] ,goal: params[:goal], end_date: params[:end_date], raised_donation: 0, active: true)
 
     if campaign.save
       render json: campaign
