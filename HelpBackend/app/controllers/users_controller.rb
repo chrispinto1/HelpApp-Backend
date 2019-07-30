@@ -17,4 +17,11 @@ class UsersController < ApplicationController
   def delete
     user = User.find_by(params[:id]).delete
   end
+
+  def update
+    user =User.find(params[:id])
+    user.update(name: params[:name], username: params[:username], password: params[:password])
+
+    render json: user
+  end
 end
