@@ -10,7 +10,7 @@ class DonationsController < ApplicationController
     donation = Donation.create(user_id: params[:user_id], campaign_id: params[:campaign_id], amount: params[:amount])
     campaign = Campaign.find(params[:campaign_id])
     campaign.update(raised_donation: campaign.raised_donation + params[:amount])
-    render json: {donation: donation, campaign: campaign}
+    render json: {donation: DonationSerializer.new(donation), campaign: CampaignSerializer.new(campaign)}
   end
 
 end
